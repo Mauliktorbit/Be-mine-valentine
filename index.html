@@ -134,9 +134,11 @@ button {
   <source src="music.mp3" type="audio/mpeg">
 </audio> -->
 
-<audio id="bgMusic" autoplay loop muted>
+<audio id="bgMusic" loop preload="auto">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
+
+
 
 
 
@@ -188,22 +190,24 @@ let char = 0;
 
 
 const bgMusic = document.getElementById("bgMusic");
+let musicStarted = false;
 
-window.addEventListener("load", () => {
-  bgMusic.play().catch(()=>{});
-});
+// Start music on FIRST user interaction anywhere
+function autoStartMusic() {
+  if (musicStarted) return;
 
-// unmute on any interaction
-function enableSound() {
-  bgMusic.muted = false;
   bgMusic.volume = 0.6;
-  bgMusic.play();
-  document.removeEventListener("click", enableSound);
-  document.removeEventListener("touchstart", enableSound);
+  bgMusic.play().catch(() => {});
+  musicStarted = true;
+
+  document.removeEventListener("click", autoStartMusic);
+  document.removeEventListener("touchstart", autoStartMusic);
 }
 
-document.addEventListener("click", enableSound);
-document.addEventListener("touchstart", enableSound);
+// Listen globally
+document.addEventListener("click", autoStartMusic);
+document.addEventListener("touchstart", autoStartMusic);
+
 
 
 
