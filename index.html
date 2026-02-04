@@ -21,6 +21,9 @@ body {
   align-items:center;
   color:#fff;
 }
+audio {
+  display: none;
+}
 
 @keyframes bgMove {
   0%{background-position:0% 50%}
@@ -127,6 +130,16 @@ button {
 </style>
 </head>
 
+<!-- <audio id="bgMusic" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio> -->
+
+<audio id="bgMusic" autoplay loop muted>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+
+
 <body>
 
 <div class="card">
@@ -148,6 +161,7 @@ button {
   </div>
 </div>
 
+
 <div class="og-credit">
   OG Creator · 
   <a href="https://www.instagram.com/the_coding_mann/" target="_blank">
@@ -156,6 +170,7 @@ button {
 </div>
 
 <script>
+
 const text = document.getElementById("text");
 const yes = document.getElementById("yes");
 const no = document.getElementById("no");
@@ -170,6 +185,29 @@ const lines = [
 
 let i = 0;
 let char = 0;
+
+
+const bgMusic = document.getElementById("bgMusic");
+
+window.addEventListener("load", () => {
+  bgMusic.play().catch(()=>{});
+});
+
+// unmute on any interaction
+function enableSound() {
+  bgMusic.muted = false;
+  bgMusic.volume = 0.6;
+  bgMusic.play();
+  document.removeEventListener("click", enableSound);
+  document.removeEventListener("touchstart", enableSound);
+}
+
+document.addEventListener("click", enableSound);
+document.addEventListener("touchstart", enableSound);
+
+
+
+
 
 function typeWriter() {
   if (char < lines[i].length) {
