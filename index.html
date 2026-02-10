@@ -190,26 +190,48 @@ let char = 0;
 
 
 const bgMusic = document.getElementById("bgMusic");
-let musicStarted = false;
+let musicUnlocked = false;
+let fadeInterval = null;
 
-// Start music on FIRST user interaction anywhere
-function autoStartMusic() {
-  if (musicStarted) return;
-
-  bgMusic.volume = 0.6;
+// Fade-in function
+function fadeInMusic() {
+  bgMusic.volume = 0;
   bgMusic.play().catch(() => {});
-  musicStarted = true;
 
-  document.removeEventListener("click", autoStartMusic);
-  document.removeEventListener("touchstart", autoStartMusic);
+  fadeInterval = setInterval(() => {
+    if (bgMusic.volume < 0.6) {
+      bgMusic.volume = Math.min(bgMusic.volume + 0.05, 0.6);
+    } else {
+      clearInterval(fadeInterval);
+    }
+  }, 200);
 }
 
-// Listen globally
-document.addEventListener("click", autoStartMusic);
-document.addEventListener("touchstart", autoStartMusic);
+// Unlock audio on FIRST user interaction (mobile + Chrome)
+function unlockAudio() {
+  if (musicUnlocked) return;
+  musicUnlocked = true;
 
+  // Prepare audio silently
+  bgMusic.volume = 0;
+  bgMusic.play().then(() => {
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+  }).catch(() => {});
 
+  document.removeEventListener("touchstart", unlockAudio);
+  document.removeEventListener("click", unlockAudio);
+}
 
+// Listen for first interaction
+document.addEventListener("touchstart", unlockAudio, { once: true });
+document.addEventListener("click", unlockAudio, { once: true });
+
+// Call this when typing starts
+function startMusicWithTyping() {
+  if (!musicUnlocked) return;
+  fadeInMusic();
+}
 
 
 
@@ -227,7 +249,9 @@ function typeWriter() {
     }, 500);
   }
 }
+startMusicWithTyping();
 typeWriter();
+
 
 const noTexts = [
   "Heyyy 😳",
