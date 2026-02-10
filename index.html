@@ -1,296 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Will You Be My Valentine?</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Will You Be My Valentine?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
 
-<style>
-* {margin:0;padding:0;box-sizing:border-box;}
-body {
-  font-family: 'Itim', cursive;
-  height:100vh;
-  overflow:hidden;
-  background: linear-gradient(-45deg, #ff4e8c, #ff758c, #ffb199, #ffdde1);
-  background-size: 400% 400%;
-  animation: bgMove 8s ease infinite;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:#fff;
-}
-audio {
-  display: none;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-@keyframes bgMove {
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
+    body {
+      font-family: 'Itim', cursive;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(-45deg, #ff4e8c, #ff758c, #ffb199, #ffdde1);
+      background-size: 400% 400%;
+      animation: bgMove 8s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
 
-.card {
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
-  border-radius: 25px;
-  padding: 30px;
-  text-align: center;
-  width: 90%;
-  max-width: 380px;
-  box-shadow: 0 20px 40px rgba(0,0,0,.3);
-  animation: popIn .8s ease;
-}
+    audio {
+      display: none;
+    }
 
-@keyframes popIn {
-  from {transform:scale(.5);opacity:0}
-  to {transform:scale(1);opacity:1}
-}
+    @keyframes bgMove {
+      0% {
+        background-position: 0% 50%
+      }
 
-h1 {
-  font-size: 22px;
-  line-height: 1.4;
-}
+      50% {
+        background-position: 100% 50%
+      }
 
-.buttons {
-  margin-top: 25px;
-  display:flex;
-  justify-content:center;
-  gap:15px;
-}
+      100% {
+        background-position: 0% 50%
+      }
+    }
 
-button {
-  border:none;
-  padding:12px 25px;
-  border-radius:30px;
-  font-size:16px;
-  cursor:pointer;
-  transition:.3s;
-}
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      padding: 30px;
+      text-align: center;
+      width: 90%;
+      max-width: 380px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, .3);
+      animation: popIn .8s ease;
+    }
 
-#yes {
-  background:#ff2e63;
-  color:white;
-  box-shadow:0 10px 20px rgba(0,0,0,.3);
-}
+    @keyframes popIn {
+      from {
+        transform: scale(.5);
+        opacity: 0
+      }
 
-#yes:hover {transform:scale(1.1)}
+      to {
+        transform: scale(1);
+        opacity: 1
+      }
+    }
 
-#no {
-  background:white;
-  color:#ff2e63;
-  position:relative;
-}
+    h1 {
+      font-size: 22px;
+      line-height: 1.4;
+    }
 
-.type {
-  min-height: 70px;
-}
+    .buttons {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
 
-.final {
-  display:none;
-  animation: fadeIn 1s ease forwards;
-}
+    button {
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: .3s;
+    }
 
-@keyframes fadeIn {
-  from {opacity:0;transform:translateY(20px)}
-  to {opacity:1;transform:translateY(0)}
-}
+    #yes {
+      background: #ff2e63;
+      color: white;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, .3);
+    }
 
-/* Floating hearts */
-.heart {
-  position:fixed;
-  bottom:-10px;
-  font-size:22px;
-  animation: floatUp linear forwards;
-}
+    #yes:hover {
+      transform: scale(1.1)
+    }
 
-@keyframes floatUp {
-  to {
-    transform: translateY(-110vh) rotate(360deg);
-    opacity:0;
-  }
-}
+    #no {
+      background: white;
+      color: #ff2e63;
+      position: relative;
+    }
 
-/* OG Credit */
-.og-credit {
-  position:fixed;
-  bottom:8px;
-  width:100%;
-  text-align:center;
-  font-size:11px;
-  opacity:.85;
-}
-.og-credit a {
-  font-size: 20px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:bold;
-}
-</style>
+    .type {
+      min-height: 70px;
+    }
+
+    .final {
+      display: none;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -10px;
+      font-size: 22px;
+      animation: floatUp linear forwards;
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* OG Credit */
+    .og-credit {
+      position: fixed;
+      bottom: 8px;
+      width: 100%;
+      text-align: center;
+      font-size: 11px;
+      opacity: .85;
+    }
+
+    .og-credit a {
+      font-size: 20px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <!-- <audio id="bgMusic" loop preload="auto">
   <source src="music.mp3" type="audio/mpeg">
 </audio> -->
 
-<audio id="bgMusic" loop preload="auto">
+<!-- <audio id="bgMusic" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio> -->
+
+<audio id="bgMusic" loop preload="auto" playsinline>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 
 
-
-
 <body>
 
-<div class="card">
-  <h1 class="type" id="text"></h1>
+  <div class="card">
+    <h1 class="type" id="text"></h1>
 
-  <div class="buttons" id="btns">
-    <button id="yes">Yes 💖</button>
-    <button id="no">No 😝</button>
+    <div class="buttons" id="btns">
+      <button id="yes">Yes 💖</button>
+      <button id="no">No 😝</button>
+    </div>
+
+    <div class="final" id="final"> <br>
+      <h1>
+        You just made me smile 😍<br>
+        Like… a lot 🥹<br>
+        You just stole my heart 💘<br>
+        Happy Valentine’s Day 🥹🫶<br>
+        I choose you. Always 💖 <br> I’M Keeping this moment forever 🫶
+      </h1>
+    </div>
   </div>
 
-  <div class="final" id="final"> <br>
-    <h1>
-     You just made me smile 😍<br>
-     Like… a lot 🥹<br>
-      You just stole my heart 💘<br>
-      Happy Valentine’s Day 🥹🫶<br>
-      I choose you. Always 💖 <br> I’M Keeping this moment forever 🫶
-    </h1>
+
+  <div class="og-credit">
+    OG Creator ·
+    <a href="https://www.instagram.com/the_coding_mann/" target="_blank">
+      @The_Coding_Mann
+    </a>
   </div>
-</div>
+
+  <script>
+
+    const text = document.getElementById("text");
+    const yes = document.getElementById("yes");
+    const no = document.getElementById("no");
+    const btns = document.getElementById("btns");
+    const final = document.getElementById("final");
+
+    const lines = [
+      "Hey you 🫣💖",
+      "I have something important to ask…",
+      "Will you be my Valentine? 💌🥹"
+    ];
+
+    let i = 0;
+    let char = 0;
 
 
-<div class="og-credit">
-  OG Creator · 
-  <a href="https://www.instagram.com/the_coding_mann/" target="_blank">
-    @The_Coding_Mann
-  </a>
-</div>
+    const bgMusic = document.getElementById("bgMusic");
+    let musicStarted = false;
 
-<script>
+    // Start music ONLY after user interaction
+    function startMusic() {
+      if (musicStarted) return;
 
-const text = document.getElementById("text");
-const yes = document.getElementById("yes");
-const no = document.getElementById("no");
-const btns = document.getElementById("btns");
-const final = document.getElementById("final");
+      musicStarted = true;
 
-const lines = [
-  "Hey you 🫣💖",
-  "I have something important to ask…",
-  "Will you be my Valentine? 💌🥹"
-];
+      bgMusic.volume = 0;
 
-let i = 0;
-let char = 0;
+      bgMusic.play().then(() => {
 
+        // Fade in music
+        let fade = setInterval(() => {
+          if (bgMusic.volume < 0.6) {
+            bgMusic.volume += 0.05;
+          } else {
+            clearInterval(fade);
+          }
+        }, 200);
 
-const bgMusic = document.getElementById("bgMusic");
-let musicUnlocked = false;
-let fadeInterval = null;
+      }).catch(err => {
+        console.log("Music blocked:", err);
+      });
 
-// Fade-in function
-function fadeInMusic() {
-  bgMusic.volume = 0;
-  bgMusic.play().catch(() => {});
-
-  fadeInterval = setInterval(() => {
-    if (bgMusic.volume < 0.6) {
-      bgMusic.volume = Math.min(bgMusic.volume + 0.05, 0.6);
-    } else {
-      clearInterval(fadeInterval);
+      document.removeEventListener("click", startMusic);
+      document.removeEventListener("touchstart", startMusic);
     }
-  }, 200);
-}
 
-// Unlock audio on FIRST user interaction (mobile + Chrome)
-function unlockAudio() {
-  if (musicUnlocked) return;
-  musicUnlocked = true;
-
-  // Prepare audio silently
-  bgMusic.volume = 0;
-  bgMusic.play().then(() => {
-    bgMusic.pause();
-    bgMusic.currentTime = 0;
-  }).catch(() => {});
-
-  document.removeEventListener("touchstart", unlockAudio);
-  document.removeEventListener("click", unlockAudio);
-}
-
-// Listen for first interaction
-document.addEventListener("touchstart", unlockAudio, { once: true });
-document.addEventListener("click", unlockAudio, { once: true });
-
-
-// Call this when typing starts
-function startMusicWithTyping() {
-  if (!musicUnlocked) return;
-  fadeInMusic();
-}
+    // Listen FIRST user interaction
+    document.addEventListener("click", startMusic);
+    document.addEventListener("touchstart", startMusic);
 
 
 
-function typeWriter() {
-  if (char < lines[i].length) {
-    text.innerHTML += lines[i].charAt(char);
-    char++;
-    setTimeout(typeWriter, 60);
-  } else {
-    setTimeout(() => {
-      text.innerHTML += "<br>";
-      char = 0;
-      i++;
-      if (i < lines.length) typeWriter();
-    }, 500);
-  }
-}
-startMusicWithTyping();
-typeWriter();
+    // Call this when typing starts
+    function startMusicWithTyping() {
+      if (!musicUnlocked) return;
+      fadeInMusic();
+    }
 
 
-const noTexts = [
-  "Heyyy 😳",
-  "Think again 🥹",
-  "Don’t break my heart 💔",
-  "Okay okay… YES? 😈💖"
-];
-let noCount = 0;
 
-no.addEventListener("mouseenter", moveNo);
-no.addEventListener("click", moveNo);
+    function typeWriter() {
+      if (char < lines[i].length) {
+        text.innerHTML += lines[i].charAt(char);
+        char++;
+        setTimeout(typeWriter, 60);
+      } else {
+        setTimeout(() => {
+          text.innerHTML += "<br>";
+          char = 0;
+          i++;
+          if (i < lines.length) typeWriter();
+        }, 500);
+      }
+    }
+    typeWriter();
 
-function moveNo() {
-  no.style.transform =
-    `translate(${Math.random()*200-100}px, ${Math.random()*200-100}px) rotate(${Math.random()*360}deg)`;
-  text.innerHTML = noTexts[noCount % noTexts.length];
-  noCount++;
-}
 
-yes.onclick = () => {
-  btns.style.display = "none";
-  final.style.display = "block";
-  explodeHearts();
-};
+    const noTexts = [
+      "Heyyy 😳",
+      "Think again 🥹",
+      "Don’t break my heart 💔",
+      "Okay okay… YES? 😈💖"
+    ];
+    let noCount = 0;
 
-function explodeHearts() {
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerText = ["💖","💘","❤️","🩷"][Math.floor(Math.random()*4)];
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.animationDuration = Math.random()*3 + 2 + "s";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),5000);
-  }, 150);
-}
-</script>
+    no.addEventListener("mouseenter", moveNo);
+    no.addEventListener("click", moveNo);
+
+    function moveNo() {
+      no.style.transform =
+        `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) rotate(${Math.random() * 360}deg)`;
+      text.innerHTML = noTexts[noCount % noTexts.length];
+      noCount++;
+    }
+
+    yes.onclick = () => {
+      btns.style.display = "none";
+      final.style.display = "block";
+      explodeHearts();
+    };
+
+    function explodeHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = ["💖", "💘", "❤️", "🩷"][Math.floor(Math.random() * 4)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }, 150);
+    }
+  </script>
 
 </body>
-</html>
 
+</html>
