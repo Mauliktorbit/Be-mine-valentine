@@ -246,33 +246,39 @@ z-index:9999;
     let char = 0;
 
 
-   const bgMusic = document.getElementById("bgMusic");
-const overlay = document.getElementById("startOverlay");
+    const bgMusic = document.getElementById("bgMusic");
+    const overlay = document.getElementById("startOverlay");
 
-overlay.addEventListener("click", () => {
+    overlay.addEventListener("click", () => {
 
-  // Play music directly from overlay click
-  bgMusic.volume = 0;
+      // Play music directly from overlay click
+      bgMusic.volume = 0;
 
-  bgMusic.play().then(() => {
+      bgMusic.play().then(() => {
 
-    // Fade in sound
-    let fade = setInterval(() => {
-      if (bgMusic.volume < 0.6) {
-        bgMusic.volume += 0.05;
-      } else {
-        clearInterval(fade);
-      }
-    }, 200);
+        // Fade in sound
+        let fade = setInterval(() => {
+          if (bgMusic.volume < 0.6) {
+            bgMusic.volume += 0.05;
+          } else {
+            clearInterval(fade);
+          }
+        }, 200);
 
-  }).catch((err) => {
-    console.log("Playback blocked:", err);
-  });
+      }).catch((err) => {
+        console.log("Playback blocked:", err);
+      });
 
-  // Hide overlay after tap
-  overlay.style.display = "none";
+      // Hide overlay after tap
+      overlay.style.opacity = "0";
+      overlay.style.transition = "0.5s";
 
-});
+      setTimeout(() => {
+        overlay.style.display = "none";
+      }, 500);
+
+
+    });
 
 
 
@@ -299,7 +305,34 @@ overlay.addEventListener("click", () => {
         }, 500);
       }
     }
-    typeWriter();
+    // typeWriter();
+    overlay.addEventListener("click", () => {
+
+      // Start Music
+      bgMusic.volume = 0;
+
+      bgMusic.play().then(() => {
+
+        let fade = setInterval(() => {
+          if (bgMusic.volume < 0.6) {
+            bgMusic.volume += 0.05;
+          } else {
+            clearInterval(fade);
+          }
+        }, 200);
+
+      }).catch((err) => {
+        console.log("Playback blocked:", err);
+      });
+
+      // Hide overlay
+      overlay.style.display = "none";
+
+      // ⭐ START TYPING AFTER CLICK
+      typeWriter();
+
+    });
+
 
 
     const noTexts = [
