@@ -170,13 +170,36 @@
   <source src="music.mp3" type="audio/mpeg">
 </audio> -->
 
-<audio id="bgMusic" loop preload="auto" playsinline>
+<!-- <audio id="bgMusic" loop preload="auto" playsinline>
+  <source src="music.mp3" type="audio/mpeg">
+</audio> -->
+
+<audio id="bgMusic" loop playsinline>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 
 
 <body>
+
+  <div id="startOverlay" style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:22px;
+z-index:9999;
+">
+    Tap anywhere ❤️
+  </div>
+
+
 
   <div class="card">
     <h1 class="type" id="text"></h1>
@@ -223,47 +246,42 @@
     let char = 0;
 
 
-    const bgMusic = document.getElementById("bgMusic");
-    let musicStarted = false;
+   const bgMusic = document.getElementById("bgMusic");
+const overlay = document.getElementById("startOverlay");
 
-    // Start music ONLY after user interaction
-    function startMusic() {
-      if (musicStarted) return;
+overlay.addEventListener("click", () => {
 
-      musicStarted = true;
+  // Play music directly from overlay click
+  bgMusic.volume = 0;
 
-      bgMusic.volume = 0;
+  bgMusic.play().then(() => {
 
-      bgMusic.play().then(() => {
+    // Fade in sound
+    let fade = setInterval(() => {
+      if (bgMusic.volume < 0.6) {
+        bgMusic.volume += 0.05;
+      } else {
+        clearInterval(fade);
+      }
+    }, 200);
 
-        // Fade in music
-        let fade = setInterval(() => {
-          if (bgMusic.volume < 0.6) {
-            bgMusic.volume += 0.05;
-          } else {
-            clearInterval(fade);
-          }
-        }, 200);
+  }).catch((err) => {
+    console.log("Playback blocked:", err);
+  });
 
-      }).catch(err => {
-        console.log("Music blocked:", err);
-      });
+  // Hide overlay after tap
+  overlay.style.display = "none";
 
-      document.removeEventListener("click", startMusic);
-      document.removeEventListener("touchstart", startMusic);
-    }
+});
 
-    // Listen FIRST user interaction
-    document.addEventListener("click", startMusic);
-    document.addEventListener("touchstart", startMusic);
 
 
 
     // Call this when typing starts
-    function startMusicWithTyping() {
-      if (!musicUnlocked) return;
-      fadeInMusic();
-    }
+    // function startMusicWithTyping() {
+    //   if (!musicUnlocked) return;
+    //   fadeInMusic();
+    // }
 
 
 
